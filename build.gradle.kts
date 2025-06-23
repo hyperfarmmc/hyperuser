@@ -5,7 +5,7 @@ plugins {
 
 allprojects {
     group = "kr.junhyung"
-    version = "1.0-SNAPSHOT"
+    version = "1.0.0"
     description = "A masterpiece."
 
     pluginManager.apply(JavaPlugin::class)
