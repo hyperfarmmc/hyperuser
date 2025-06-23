@@ -25,8 +25,8 @@ publishing {
                 url = uri("https://nexus.junhyung.kr/repository/maven-releases/")
             }
             credentials {
-                username = System.getenv("NEXUS_USERNAME").toString()
-                password = System.getenv("NEXUS_PASSWORD").toString()
+                username = System.getenv("NEXUS_USERNAME")
+                password = System.getenv("NEXUS_PASSWORD")
             }
         }
     }
