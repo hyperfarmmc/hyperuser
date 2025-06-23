@@ -1,0 +1,9 @@
+{
+  "id": "${project.rootProject.name}",
+  "version": "${project.version}",
+  "description": "${project.description}",
+  "authors": [
+    "vjh0107"
+  ],
+  "main": "kr.junhyung.hyperuser.velocity.HyperuserVelocityPlugin"
+}
