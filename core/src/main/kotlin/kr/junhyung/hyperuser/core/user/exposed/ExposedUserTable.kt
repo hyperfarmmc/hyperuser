@@ -17,6 +17,6 @@ internal object ExposedUserTable : IntIdTable("user") {
     val lastLoginAt = datetime("last_login_at").clientDefault { LocalDateTime.now() }
     val lastLogoutAt = datetime("last_logout_at").nullable()
 
-    val updatedAt = datetime("updated_at")
+    val updatedAt = datetime("updated_at").nullable()
 
 }
