@@ -1,6 +1,7 @@
 package kr.junhyung.hyperuser.velocity.user
 
 import com.velocitypowered.api.event.Subscribe
+import com.velocitypowered.api.event.connection.DisconnectEvent
 import com.velocitypowered.api.event.connection.LoginEvent
 import kr.junhyung.hyperuser.core.user.UserService
 import kr.junhyung.mainframe.core.event.Listener
@@ -30,7 +31,7 @@ class UserLogListener(
     }
 
     @Subscribe
-    suspend fun onLogout(event: LoginEvent) {
+    suspend fun onLogout(event: DisconnectEvent) {
         val player = event.player
         val user = userService.findByMinecraftId(player.uniqueId)
         if (user == null) {
