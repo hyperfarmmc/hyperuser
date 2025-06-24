@@ -34,6 +34,13 @@ internal class ExposedUserRepository : UserRepository {
             .firstOrNull()
     }
 
+    override fun findByMinecraftUsername(name: String): User? {
+        return ExposedUserTable.selectAll()
+            .where { ExposedUserTable.minecraftUsername eq name }
+            .map(::wrapRow)
+            .firstOrNull()
+    }
+
     override fun findByName(name: String): User? {
         return ExposedUserTable.selectAll()
             .where { ExposedUserTable.name eq name }

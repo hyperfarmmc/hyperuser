@@ -1,5 +1,6 @@
 package kr.junhyung.hyperuser.core.user.redis
 
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
@@ -20,22 +21,30 @@ internal class RedisUserCache(
 
     private val valueOps = reactiveUserRedisTemplate.opsForValue()
 
-    private val keyByUUID = UUIDKeyProvider("user:uuid:")
-    private val keyByName = StringKeyProvider("user:name:")
+    private val keyByUUID = UUIDKeyProvider("hyperuser:user:uuid:")
+    private val keyByMinecraftUsername = StringKeyProvider("hyperuser:user:minecraft-username:")
+    private val keyByName = StringKeyProvider("hyperuser:user:name:")
 
     override suspend fun put(user: User) {
         coroutineScope {
+            val jobs = mutableListOf<Job>()
             val cacheByIdJob = launch {
                 valueOps.setAndAwait(keyByUUID.getKey(user.minecraftId), user)
             }
+            jobs.add(cacheByIdJob)
             if (user.minecraftUsername != null) {
                 val cacheByUsernameJob = launch {
-                    valueOps.setAndAwait(keyByName.getKey(user.minecraftUsername), user)
+                    valueOps.setAndAwait(keyByMinecraftUsername.getKey(user.minecraftUsername), user)
                 }
-                joinAll(cacheByIdJob, cacheByUsernameJob)
-            } else {
-                cacheByIdJob.join()
+                jobs.add(cacheByUsernameJob)
             }
+            if (user.name != null) {
+                val cacheByNameJob = launch {
+                    valueOps.setAndAwait(keyByName.getKey(user.name), user)
+                }
+                jobs.add(cacheByNameJob)
+            }
+            jobs.joinAll()
         }
     }
 
@@ -44,6 +53,10 @@ internal class RedisUserCache(
     }
 
     override suspend fun findByMinecraftUsername(name: String): User? {
+        return valueOps.getAndAwait(keyByMinecraftUsername.getKey(name))
+    }
+
+    override suspend fun findByName(name: String): User? {
         return valueOps.getAndAwait(keyByName.getKey(name))
     }
 

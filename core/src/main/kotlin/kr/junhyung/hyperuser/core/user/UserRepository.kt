@@ -9,6 +9,8 @@ internal interface UserRepository {
 
     fun findByMinecraftId(minecraftId: UUID): User?
 
+    fun findByMinecraftUsername(name: String): User?
+
     fun findByName(name: String): User?
 
     fun findByDiscordId(discordId: String): User?

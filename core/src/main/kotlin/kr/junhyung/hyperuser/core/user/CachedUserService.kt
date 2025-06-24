@@ -41,6 +41,15 @@ internal class CachedUserService(
         return delegate.findByMinecraftUsername(name)
     }
 
+    override suspend fun findByName(name: String): User? {
+        val cached = userCache.findByName(name)
+        if (cached != null) {
+            logger.debug("Cache hit: {}, name={}", cached, name)
+            return cached
+        }
+        return delegate.findByName(name)
+    }
+
     override suspend fun updateMinecraftUsername(
         user: User,
         minecraftUsername: String

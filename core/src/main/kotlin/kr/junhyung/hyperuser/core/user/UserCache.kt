@@ -10,4 +10,6 @@ internal interface UserCache {
 
     suspend fun findByMinecraftUsername(name: String): User?
 
+    suspend fun findByName(name: String): User?
+
 }

@@ -36,6 +36,12 @@ internal class TxUserService(
 
     override suspend fun findByMinecraftUsername(name: String): User? {
         return transactionManager.transactional {
+            userRepository.findByMinecraftUsername(name) ?: return@transactional null
+        }
+    }
+
+    override suspend fun findByName(name: String): User? {
+        return transactionManager.transactional {
             userRepository.findByName(name) ?: return@transactional null
         }
     }
