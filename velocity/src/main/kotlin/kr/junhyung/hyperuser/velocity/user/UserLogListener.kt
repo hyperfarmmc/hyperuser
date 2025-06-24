@@ -3,7 +3,7 @@ package kr.junhyung.hyperuser.velocity.user
 import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.connection.DisconnectEvent
 import com.velocitypowered.api.event.connection.LoginEvent
-import kr.junhyung.hyperuser.core.user.UserPersistService
+import kr.junhyung.hyperuser.core.user.UserQueryService
 import kr.junhyung.hyperuser.core.user.UserService
 import kr.junhyung.mainframe.core.event.Listener
 import org.slf4j.LoggerFactory
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory
 @Listener
 class UserLogListener(
     private val userService: UserService,
-    private val userPersistService: UserPersistService
+    private val userQueryService: UserQueryService
 ) {
 
     private val logger = LoggerFactory.getLogger(UserLogListener::class.java)
@@ -19,7 +19,7 @@ class UserLogListener(
     @Subscribe
     suspend fun onLogin(event: LoginEvent) {
         val player = event.player
-        val user = userPersistService.findByMinecraftId(player.uniqueId)
+        val user = userQueryService.findByMinecraftId(player.uniqueId)
         if (user == null) {
             logger.debug("Creating new user for player: {}", player.username)
             userService.new(player.uniqueId, player.username)

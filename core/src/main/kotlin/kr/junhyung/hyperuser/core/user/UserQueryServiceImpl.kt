@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service
 import java.util.UUID
 
 @Service
-internal class UserPersistServiceImpl(
+internal class UserQueryServiceImpl(
     private val transactionManager: TransactionManager,
     private val userRepository: UserRepository,
-) : UserPersistService {
+) : UserQueryService {
 
     override suspend fun findByMinecraftId(minecraftId: UUID): User? {
 
