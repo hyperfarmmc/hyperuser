@@ -21,15 +21,15 @@ internal class RedisUserCache(
 
     private val valueOps = reactiveUserRedisTemplate.opsForValue()
 
-    private val keyByUUID = UUIDKeyProvider("hyperuser:user:uuid:")
-    private val keyByMinecraftUsername = StringKeyProvider("hyperuser:user:minecraft-username:")
+    private val keyByMinecraftId = UUIDKeyProvider("hyperuser:user:uuid:")
+    private val keyByMinecraftUsername = StringKeyProvider("hyperuser:user:minecraft_username:")
     private val keyByName = StringKeyProvider("hyperuser:user:name:")
 
     override suspend fun put(user: User) {
         coroutineScope {
             val jobs = mutableListOf<Job>()
             val cacheByIdJob = launch {
-                valueOps.setAndAwait(keyByUUID.getKey(user.minecraftId), user)
+                valueOps.setAndAwait(keyByMinecraftId.getKey(user.minecraftId), user)
             }
             jobs.add(cacheByIdJob)
             if (user.minecraftUsername != null) {
@@ -49,7 +49,7 @@ internal class RedisUserCache(
     }
 
     override suspend fun findByMinecraftId(minecraftId: UUID): User? {
-        return valueOps.getAndAwait(keyByUUID.getKey(minecraftId))
+        return valueOps.getAndAwait(keyByMinecraftId.getKey(minecraftId))
     }
 
     override suspend fun findByMinecraftUsername(name: String): User? {
