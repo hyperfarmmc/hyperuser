@@ -27,13 +27,6 @@ internal class ExposedUserRepository : UserRepository {
         return user.copy(id = id.value)
     }
 
-    override fun findById(id: Int): User? {
-        return ExposedUserTable.selectAll()
-            .where { ExposedUserTable.id eq id }
-            .map(::wrapRow)
-            .firstOrNull()
-    }
-
     override fun findByMinecraftId(minecraftId: UUID): User? {
         return ExposedUserTable.selectAll()
             .where { ExposedUserTable.minecraftId eq minecraftId }
@@ -55,36 +48,36 @@ internal class ExposedUserRepository : UserRepository {
             .firstOrNull()
     }
 
-    override fun updateDiscordIdById(userId: Int, discordId: String): Int {
-        return ExposedUserTable.update({ ExposedUserTable.id eq userId }) {
+    override fun updateDiscordId(user: User, discordId: String): Int {
+        return ExposedUserTable.update({ ExposedUserTable.id eq user.id }) {
             it[ExposedUserTable.discordId] = discordId
             it[ExposedUserTable.updatedAt] = LocalDateTime.now()
         }
     }
 
-    override fun updateMinecraftUsernameById(userId: Int, minecraftUsername: String?): Int {
-        return ExposedUserTable.update({ ExposedUserTable.id eq userId }) {
+    override fun updateMinecraftUsername(user: User, minecraftUsername: String?): Int {
+        return ExposedUserTable.update({ ExposedUserTable.id eq user.id }) {
             it[ExposedUserTable.minecraftUsername] = minecraftUsername
             it[ExposedUserTable.updatedAt] = LocalDateTime.now()
         }
     }
 
-    override fun updateLastLoginAtById(userId: Int, lastLoginAt: LocalDateTime): Int {
-        return ExposedUserTable.update({ ExposedUserTable.id eq userId }) {
+    override fun updateLastLoginAt(user: User, lastLoginAt: LocalDateTime): Int {
+        return ExposedUserTable.update({ ExposedUserTable.id eq user.id }) {
             it[ExposedUserTable.lastLoginAt] = lastLoginAt
             it[ExposedUserTable.updatedAt] = LocalDateTime.now()
         }
     }
 
-    override fun updateLastLogoutAtById(userId: Int, lastLogoutAt: LocalDateTime): Int {
-        return ExposedUserTable.update({ ExposedUserTable.id eq userId }) {
+    override fun updateLastLogoutAt(user: User, lastLogoutAt: LocalDateTime): Int {
+        return ExposedUserTable.update({ ExposedUserTable.id eq user.id }) {
             it[ExposedUserTable.lastLogoutAt] = lastLogoutAt
             it[ExposedUserTable.updatedAt] = LocalDateTime.now()
         }
     }
 
-    override fun updateNameById(userId: Int, name: String?): Int {
-        return ExposedUserTable.update({ ExposedUserTable.id eq userId }) {
+    override fun updateName(user: User, name: String?): Int {
+        return ExposedUserTable.update({ ExposedUserTable.id eq user.id }) {
             it[ExposedUserTable.name] = name
             it[ExposedUserTable.updatedAt] = LocalDateTime.now()
         }
