@@ -12,6 +12,8 @@ public interface UserService {
 
     public suspend fun findByName(name: String): User?
 
+    public suspend fun search(name: String): User?
+
     public suspend fun updateMinecraftUsername(user: User, minecraftUsername: String): User
 
     public suspend fun updateName(user: User, name: String): User

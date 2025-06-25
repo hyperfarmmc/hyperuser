@@ -1,5 +1,6 @@
 package kr.junhyung.hyperuser.core.user
 
+import io.lettuce.core.KillArgs.Builder.user
 import kr.junhyung.mainframe.core.transaction.TransactionManager
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Qualifier
@@ -43,6 +44,16 @@ internal class TxUserService(
     override suspend fun findByName(name: String): User? {
         return transactionManager.transactional {
             userRepository.findByName(name) ?: return@transactional null
+        }
+    }
+
+    override suspend fun search(name: String): User? {
+        return transactionManager.transactional {
+            val userByName = userRepository.findByName(name)
+            if (userByName != null) {
+                return@transactional userByName
+            }
+            userRepository.findByMinecraftUsername(name)
         }
     }
 

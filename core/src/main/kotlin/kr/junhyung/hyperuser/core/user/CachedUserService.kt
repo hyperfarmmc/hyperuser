@@ -1,5 +1,6 @@
 package kr.junhyung.hyperuser.core.user
 
+import io.netty.util.AsciiString.cached
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Service
@@ -48,6 +49,18 @@ internal class CachedUserService(
             return cached
         }
         return delegate.findByName(name)
+    }
+
+    override suspend fun search(name: String): User? {
+        val cachedByName = findByName(name)
+        if (cachedByName != null) {
+            return cachedByName
+        }
+        val cachedByMinecraftUsername = findByMinecraftUsername(name)
+        if (cachedByMinecraftUsername != null) {
+            return cachedByMinecraftUsername
+        }
+        return delegate.search(name)
     }
 
     override suspend fun updateMinecraftUsername(
