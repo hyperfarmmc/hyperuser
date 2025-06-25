@@ -16,4 +16,8 @@ allprojects {
         }
     }
 
+    tasks.withType<AbstractArchiveTask> {
+        archiveBaseName.set(rootProject.name)
+    }
+
 }
