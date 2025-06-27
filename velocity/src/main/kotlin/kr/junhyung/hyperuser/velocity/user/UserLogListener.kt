@@ -6,12 +6,10 @@ import com.velocitypowered.api.event.connection.LoginEvent
 import kr.junhyung.hyperuser.core.user.UserService
 import kr.junhyung.mainframe.core.event.Listener
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Qualifier
 
 @Listener
 class UserLogListener(
-    private val userService: UserService,
-    @Qualifier("txUserService") private val txUserService: UserService
+    private val userService: UserService
 ) {
 
     private val logger = LoggerFactory.getLogger(UserLogListener::class.java)
@@ -19,7 +17,7 @@ class UserLogListener(
     @Subscribe
     suspend fun onLogin(event: LoginEvent) {
         val player = event.player
-        val user = txUserService.findByMinecraftId(player.uniqueId)
+        val user = userService.findByMinecraftIdNoCache(player.uniqueId)
         if (user == null) {
             logger.debug("Creating new user for player: {}", player.username)
             userService.new(player.uniqueId, player.username)
