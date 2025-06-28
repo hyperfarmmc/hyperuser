@@ -1,6 +1,5 @@
 package kr.junhyung.hyperuser.core.user
 
-import io.lettuce.core.KillArgs.Builder.user
 import kr.junhyung.mainframe.core.transaction.TransactionManager
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service

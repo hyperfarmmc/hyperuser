@@ -48,8 +48,8 @@ public data class User(
         return lastLogoutAt == null || lastLoginAt.isAfter(lastLogoutAt)
     }
 
-    public fun getDisplayName(): String {
-        return name ?: minecraftUsername ?: "Unknown"
+    public fun getDisplayName(fallback: String = "Unknown"): String {
+        return name ?: minecraftUsername ?: fallback
     }
 
 }
