@@ -1,6 +1,6 @@
 plugins {
     java
-    id("kr.junhyung.mainframe") version "0.0.1-SNAPSHOT" apply false
+    id("kr.junhyung.mainframe") version "0.1.1-SNAPSHOT" apply false
 }
 
 allprojects {

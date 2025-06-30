@@ -1,11 +1,11 @@
-package kr.junhyung.hyperuser.core.user.redis
+package kr.junhyung.hyperfarm.hyperuser.core.user.redis
 
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
-import kr.junhyung.hyperuser.core.user.User
-import kr.junhyung.hyperuser.core.user.UserCache
+import kr.junhyung.hyperfarm.hyperuser.core.user.User
+import kr.junhyung.hyperfarm.hyperuser.core.user.UserCache
 import kr.junhyung.mainframe.core.util.StringKeyProvider
 import kr.junhyung.mainframe.core.util.UUIDKeyProvider
 import org.springframework.data.redis.core.ReactiveRedisTemplate

@@ -1,4 +1,4 @@
-package kr.junhyung.hyperuser.core.user.exposed
+package kr.junhyung.hyperfarm.hyperuser.core.user.exposed
 
 import kr.junhyung.mainframe.exposed.table.Table
 import org.jetbrains.exposed.dao.id.IntIdTable

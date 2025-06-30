@@ -1,4 +1,4 @@
-package kr.junhyung.hyperuser.core.user
+package kr.junhyung.hyperfarm.hyperuser.core.user
 
 import java.time.LocalDateTime
 import java.util.UUID

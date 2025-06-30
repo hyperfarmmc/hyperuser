@@ -1,7 +1,7 @@
-package kr.junhyung.hyperuser.core.user.exposed
+package kr.junhyung.hyperfarm.hyperuser.core.user.exposed
 
-import kr.junhyung.hyperuser.core.user.User
-import kr.junhyung.hyperuser.core.user.UserRepository
+import kr.junhyung.hyperfarm.hyperuser.core.user.User
+import kr.junhyung.hyperfarm.hyperuser.core.user.UserRepository
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.selectAll

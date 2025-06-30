@@ -1,7 +1,7 @@
-package kr.junhyung.hyperuser.core.user.redis
+package kr.junhyung.hyperfarm.hyperuser.core.user.redis
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import kr.junhyung.hyperuser.core.user.User
+import kr.junhyung.hyperfarm.hyperuser.core.user.User
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory

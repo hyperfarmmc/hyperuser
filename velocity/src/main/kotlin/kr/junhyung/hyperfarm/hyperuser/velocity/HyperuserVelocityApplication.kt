@@ -1,6 +1,6 @@
-package kr.junhyung.hyperuser.velocity
+package kr.junhyung.hyperfarm.hyperuser.velocity
 
-import kr.junhyung.hyperuser.core.HyperuserCoreModule
+import kr.junhyung.hyperfarm.hyperuser.core.HyperuserCoreModule
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Import
 

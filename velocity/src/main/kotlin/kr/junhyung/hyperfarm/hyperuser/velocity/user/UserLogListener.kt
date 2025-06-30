@@ -1,9 +1,9 @@
-package kr.junhyung.hyperuser.velocity.user
+package kr.junhyung.hyperfarm.hyperuser.velocity.user
 
 import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.connection.DisconnectEvent
 import com.velocitypowered.api.event.connection.LoginEvent
-import kr.junhyung.hyperuser.core.user.UserService
+import kr.junhyung.hyperfarm.hyperuser.core.user.UserService
 import kr.junhyung.mainframe.core.event.Listener
 import org.slf4j.LoggerFactory
 

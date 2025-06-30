@@ -1,4 +1,4 @@
-package kr.junhyung.hyperuser.core.user
+package kr.junhyung.hyperfarm.hyperuser.core.user
 
 import kr.junhyung.mainframe.core.transaction.TransactionManager
 import org.slf4j.LoggerFactory
